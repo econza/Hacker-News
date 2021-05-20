@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles({
   card: {
@@ -24,9 +25,18 @@ const useStyles = makeStyles({
 export default function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
+  const dispatch = useDispatch();
+
+  // useEffect((ids) => {
+  //   fetch(`https://hacker-news.firebaseio.com/v0/item/${ids[0]}.json?print=pretty`)
+  //       .then((res) => res.json())
+  //       .then((TEST) => console.log('TEST', TEST))
+  // }, []);
+
+
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} md={12}>
       <CardActionArea component="a" href="#">
         <Card className={classes.card}>
           <div className={classes.cardDetails}>

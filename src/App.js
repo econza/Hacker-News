@@ -1,81 +1,50 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import './App.css';
-import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
-import { AppBar, Container, Toolbar, Typography, ButtonGroup, Button, Grid } from '@material-ui/core';
+import { Container, Grid, CssBaseline } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import FeaturedPost from './FeaturedPosts';
+import Header from './Header';
+import Footer from './Footer';
 
+import NewsPage from './pages/NewsPage/NewsPage'
+import PostPage from './pages/PostPage/PostPage'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  title: {
-    marginRight: theme.spacing(2),
-    marginLeft: theme.spacing(1)
-  },
-  buttonGroup: {
-    marginRight: theme.spacing(50)
-  },
-}))
+import { getNewsThunk } from '../src/redux/actions'
+import { useDispatch, useSelector } from 'react-redux';
 
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageText: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageText: 'Image Text',
-  },
+const sections = [
+  { title: 'New', url: '#' },
+  { title: 'Past', url: '#' },
+  { title: 'Comments', url: '#' },
+  { title: 'Ask', url: '#' },
+  { title: 'Show', url: '#' },
+  { title: 'Jobs', url: '#' },
+  { title: 'Submit', url: '#' },
 ];
 
 function App() {
-
-  const classes = useStyles();
-
   return (
-    <>
-      <AppBar position='fixed'>
-        <Container fixed>
-          <Toolbar>
-            <BrightnessHighIcon />
-            <Typography variant="h6" className={classes.title}>Hacker News</Typography>
-            <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" className={classes.buttonGroup}>
-              <Button>new</Button>
-              <Button>past</Button>
-              <Button>comments</Button>
-              <Button>ask</Button>
-              <Button>show</Button>
-              <Button>jobs</Button>
-              <Button>submit</Button>
-            </ButtonGroup>
-            <Button variant="contained" color="defaults">
-              login
-          </Button>
-          </Toolbar>
-        </Container>
-      </AppBar>
+    <Router>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <Header title="Hacker News" sections={sections} />
 
-      <main>
-          <Container fixed>
-            <Grid container spacing={4}>
-              {featuredPosts.map((post) => (
-                <FeaturedPost key={post.title} post={post} />
-              ))}
-            </Grid>
-          </Container>
-      </main>
-    </>
-  );
+        <Switch>
+          <Route exact path="/news"><NewsPage /></Route>
+          <Route path="/news/:id"><PostPage /></Route>
+
+          <Redirect exact from="/" to="news" />
+        </Switch>
+
+        <Footer title="Footer" description="Something here to give the footer a purpose!" />
+      </Container>
+    </Router>
+  )
 }
 
 export default App;
