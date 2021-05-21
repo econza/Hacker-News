@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import { default as ViewLink } from '@material-ui/core/Link';
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -12,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarTitle: {
     flex: 1,
+    cursor: 'pointer',
   },
   toolbarSecondary: {
     justifyContent: 'space-between',
@@ -25,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
   const classes = useStyles();
+  const history = useHistory()
+
   const { sections, title } = props;
 
   return (
@@ -37,6 +41,7 @@ export default function Header(props) {
           align="center"
           noWrap
           className={classes.toolbarTitle}
+          onClick={() => history.push(`/news`)}
         >
           {title}
         </Typography>
@@ -46,16 +51,17 @@ export default function Header(props) {
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
-          <Link
+          <ViewLink
             color="inherit"
             noWrap
             key={section.title}
             variant="body2"
-            href={section.url}
+            component={Link}
+            to="/news"
             className={classes.toolbarLink}
           >
             {section.title}
-          </Link>
+          </ViewLink>
         ))}
       </Toolbar>
     </React.Fragment>

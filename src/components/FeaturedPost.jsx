@@ -11,6 +11,8 @@ import {
     Link
 } from '@material-ui/core/';
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles({
     card: {
@@ -27,10 +29,11 @@ const useStyles = makeStyles({
 export const FeaturedPost = ({ title, url, id, by, time, score }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    let history = useHistory();
 
     return (
         <Grid item xs={12} md={12}>
-            <CardActionArea component="a" href={`/news/${id}`}>
+            <CardActionArea component="div" onClick={() => history.push(`/news/${id}`)}>
                 <Card className={classes.card}>
                     <div className={classes.cardDetails}>
                         <CardContent>
