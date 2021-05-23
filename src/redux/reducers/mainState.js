@@ -1,8 +1,9 @@
-import { GET_IDS, SET_NEWS } from '../actions'
+import { GET_IDS, SET_NEWS, SET_COMMENTS } from '../actions'
 
 const initialState = {
   isLoaded: true,
-  news: []
+  news: [],
+  comments: []
 };
 
 const mainState = (state = initialState, action) => {
@@ -17,7 +18,13 @@ const mainState = (state = initialState, action) => {
       return {
         ...state,
         news: action.news
-      }
+      }; 
+
+      case SET_COMMENTS:
+        return {
+          ...state,
+          comments: action.comments
+        }; 
 
     default:
       return state;

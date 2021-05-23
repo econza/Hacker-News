@@ -8,6 +8,11 @@ import {
     CardActionArea,
     CardContent
 } from '@material-ui/core/';
+import { useSelector } from 'react-redux';
+import { commentsSelector } from '../redux/selectors';
+import { CommentsArea } from './CommentsArea';
+
+
 
 const useStyles = makeStyles({
     card: {
@@ -23,23 +28,34 @@ const useStyles = makeStyles({
 
 export const SinglePost = ({ title, url, id, by, time, score }) => {
     const classes = useStyles();
+    const comments = useSelector(commentsSelector)
 
+    console.log("О0О0О", title)
     return (
         <Grid item xs={12} md={12}>
-            <CardActionArea component="a" href={`/news/${id}`}>
-                <Card className={classes.card}>
-                    <div className={classes.cardDetails}>
-                        <CardContent>
-                            <Typography component="h2" variant="h5">
-                                {title}
-                            </Typography>
-                            <Typography variant="subtitle1" color="textSecondary">
-                                {score} points by {by} {formatDate(time)}
-                            </Typography>
-                        </CardContent>
-                    </div>
-                </Card>
-            </CardActionArea>
+            <Card className={classes.card}>
+                <div className={classes.cardDetails}>
+                    <CardContent>
+                        <Typography component="h2" variant="h5">
+                            {title}
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            {score} points by {by} {formatDate(time)}
+                        </Typography>
+
+                        {comments.map((comments) => (
+                            <CommentsArea
+                                key={comments.id}
+                                id={comments.id}
+                                text={comments.text}
+                                by={comments.by}
+                                time={comments.time}
+                            />
+
+                        ))}
+                    </CardContent>
+                </div>
+            </Card>
         </Grid>
     );
 }
