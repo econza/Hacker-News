@@ -1,5 +1,7 @@
 export const GET_IDS = "@main/GET_IDS";
 export const SET_NEWS = "@main/SET_NEWS";
+export const SET_COMMENTS = "@main/SET_COMMENTS";
+export const SET_SUBCOMMENTS = "@main/SET_SUBCOMMENTS";
 
 export const MAX_NEWS_COUNT = 10;
 export const MAX_COMMENTS_COUNT = 10;
@@ -19,6 +21,21 @@ export const setNews = (news) => {
         news
     }
 }
+
+export const setComments = (comments) => {
+  return {
+      type: SET_COMMENTS,
+      comments
+  }
+}
+
+export const setSubComments = (commentId, subComments) => {
+  return {
+    type: SET_SUBCOMMENTS,
+    commentId, subComments
+  }
+}
+
 
 
 export const getNewsThunk = () => async (dispatch) => {
@@ -58,8 +75,27 @@ export const getNewsThunk = () => async (dispatch) => {
 
     console.log('comments', comments)
 
-    return 123;
+    return dispatch(setComments(comments));
   };
+
+
+  export const getKidsCommentsThunk = (commentId, commentsKids) => async (dispatch) => {
+    // [881238, 12838, 12838, 12838, 812388]
+    const filteredKids = commentsKids.filter((_, id) => id < MAX_COMMENTS_COUNT);
+  
+    const subComments = await Promise.all(
+      filteredKids.map((id) =>
+        fetch(
+          `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
+        )
+      )
+    ).then((results) => Promise.all(results.map((r) => r.json())));
+
+    console.log('KidsComments', subComments)
+
+    return dispatch(setSubComments(commentId, subComments));
+  };
+
 
 export const getSingleNewsByIdThunk = (selectedId) => async (dispatch) => {
   fetch(`https://hacker-news.firebaseio.com/v0/item/${selectedId}.json?print=pretty`)
