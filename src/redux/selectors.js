@@ -8,7 +8,7 @@ export const getNewsByIdSelector = (selectedId) => createSelector(
     (news) => {
         const selectedNews = news.find((item) => item.id == selectedId)
 
-        return selectedNews?.kids
+        return selectedNews
     }
 )
 
@@ -19,4 +19,9 @@ export const getCommentsByIdSelector = (selectedId) => createSelector(
 
         return selectedComments?.kids
     }
+)
+
+export const getSubcommentsById = (commentId) => createSelector(
+    (state) => state.mainState.subComments,
+    (subComments) => subComments && subComments[commentId]
 )

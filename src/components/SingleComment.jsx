@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -7,10 +7,13 @@ import {
     Card,
     CardActionArea,
     CardContent,
-    Link
+    Link,
+    Divider
 } from '@material-ui/core/';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getKidsCommentsThunk } from '../redux/actions'
 import { formatDate } from '../helpers/formatDate';
+import { getSubcommentsById } from '../redux/selectors';
 
 
 
@@ -26,8 +29,17 @@ const useStyles = makeStyles({
     },
 });
 
-export const CommentsArea = ({ text, by, time }) => {
+export const SingleComment = ({ text, by, time, id, kids }) => {
+    const subComments = useSelector(getSubcommentsById(id))
     const classes = useStyles();
+
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        if (id && kids) {
+            dispatch(getKidsCommentsThunk(id, kids))
+        }
+    }, [id, kids])
 
     return (
         <Grid item xs={12} md={12}>
@@ -41,6 +53,17 @@ export const CommentsArea = ({ text, by, time }) => {
                         <Typography component="body2" variant="body2">
                             {text}
                         </Typography>
+                        {subComments?.length && subComments.map((item) => (
+                            <div style={{ padding: "10px", display: "flex", flexDirection: "column"}}>
+                                <div>
+                                    <strong>{item.by}</strong>
+                                </div>
+                                    <div>
+                                    {item.text}
+                                </div>
+                            </div>
+                        ))}
+                        
                     </CardContent>
                 </div>
             </Card>
