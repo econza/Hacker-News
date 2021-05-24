@@ -34,7 +34,7 @@ export const SingleComment = ({ text, by, time, id, kids }) => {
     const classes = useStyles();
 
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         if (id && kids) {
             dispatch(getKidsCommentsThunk(id, kids))
@@ -44,28 +44,31 @@ export const SingleComment = ({ text, by, time, id, kids }) => {
     return (
         <Grid item xs={12} md={12}>
             <Card className={classes.card}>
+                <CardActionArea>
                 <div className={classes.cardDetails}>
                     <CardContent>
                         <Typography component="subtitle2" variant="subtitle2">
-                           by {by} {formatDate(time)} 
+                            by {by} {formatDate(time)}
                         </Typography>
                         <br />
                         <Typography component="body2" variant="body2">
                             {text}
                         </Typography>
                         {subComments?.length && subComments.map((item) => (
-                            <div style={{ padding: "10px", display: "flex", flexDirection: "column"}}>
+ 
+                            <div style={{ padding: "15px", display: "flex", flexDirection: "column"}}>
                                 <div>
-                                    <strong>{item.by}</strong>
+                                    <strong><i> - by{item.by}</i></strong>
                                 </div>
                                     <div>
                                     {item.text}
                                 </div>
                             </div>
                         ))}
-                        
+
                     </CardContent>
                 </div>
+                </CardActionArea>
             </Card>
         </Grid>
     );
