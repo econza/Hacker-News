@@ -49,7 +49,7 @@ export default function Header(props) {
           Login
         </Button>
       </Toolbar>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+      {/* <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
           <ViewLink
             color="inherit"
@@ -63,7 +63,7 @@ export default function Header(props) {
             {section.title}
           </ViewLink>
         ))}
-      </Toolbar>
+      </Toolbar> */}
     </React.Fragment>
   );
 }
