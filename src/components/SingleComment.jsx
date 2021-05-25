@@ -43,12 +43,11 @@ export const SingleComment = ({ text, by, time, id, kids }) => {
                 </AccordionSummary>
                 {subComments?.length && subComments.map((item) => (
                     <AccordionDetails style={{ padding: "15px", display: "flex", flexDirection: "column" }}>
-                        <Typography variant="subtitle2">- by {item.by}</Typography>
-                        <Typography variant="body2">{item.text}</Typography>
+                        <Typography variant="subtitle2" style={{ marginLeft: "15px"}}>- by {item.by}</Typography>
+                        <Typography variant="body2" style={{ marginLeft: "20px"}}>{item.text}</Typography>
                     </AccordionDetails>
                 ))}
             </Accordion>
         </Grid>
-
     )
 }
