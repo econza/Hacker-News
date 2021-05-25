@@ -19,7 +19,6 @@ const NewsPage = () => {
 
     return (
         <main>
-            <Container fixed>
                 <Grid container spacing={2}>
                     {news.map((post) => (
                         <FeaturedPost
@@ -32,7 +31,6 @@ const NewsPage = () => {
                             score={post.score} />
                     ))}
                 </Grid>
-            </Container>
         </main>
     )
 }
