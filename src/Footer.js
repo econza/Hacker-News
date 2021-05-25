@@ -33,11 +33,11 @@ export default function Footer(props) {
           <Button>Guidelines</Button>
           <Button>FAQ</Button>
           <Button>Lists</Button>
-          <Button>API</Button>
+          {/* <Button>API</Button>
           <Button>Security</Button>
           <Button>Legal</Button>
           <Button>Apply to YC</Button>
-          <Button>Contact</Button>
+          <Button>Contact</Button> */}
         </ButtonGroup>
         <IconButton>
           <SearchIcon />

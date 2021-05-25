@@ -20,7 +20,7 @@ const NewsPage = () => {
     return (
         <main>
             <Container fixed>
-                <Grid container spacing={4}>
+                <Grid container spacing={2}>
                     {news.map((post) => (
                         <FeaturedPost
                             key={post.id}
