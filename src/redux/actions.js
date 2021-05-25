@@ -36,8 +36,6 @@ export const setSubComments = (commentId, subComments) => {
   }
 }
 
-
-
 export const getNewsThunk = () => async (dispatch) => {
     const res = await fetch(
       "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
@@ -77,7 +75,6 @@ export const getNewsThunk = () => async (dispatch) => {
 
     return dispatch(setComments(comments));
   };
-
 
   export const getKidsCommentsThunk = (commentId, commentsKids) => async (dispatch) => {
     // [881238, 12838, 12838, 12838, 812388]
