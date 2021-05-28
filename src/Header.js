@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { default as ViewLink } from '@material-ui/core/Link';
 import { Link, useHistory } from "react-router-dom";
 import { IconButton } from '@material-ui/core';
-import RefreshIcon from '@material-ui/icons/Refresh';
+
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -47,9 +47,6 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton onClick={() => window.location.reload(false)}>
-          <RefreshIcon />
-        </IconButton>
         {/* <Button variant="outlined" size="small">
           Login
         </Button> */}

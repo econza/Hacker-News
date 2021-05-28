@@ -8,7 +8,7 @@ import {
     AccordionDetails
 } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
-import { getKidsCommentsThunk } from '../redux/actions'
+import { getKidsCommentsThunk, getCommentsThunk } from '../redux/actions'
 import { formatDate } from '../helpers/formatDate';
 import { getSubcommentsById } from '../redux/selectors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -25,7 +25,7 @@ export const SingleComment = ({ text, by, time, id, kids }) => {
 
     return (
         <Grid item xs={12} md={12}>
-            <Accordion>
+            <Accordion defaultExpanded>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -43,8 +43,8 @@ export const SingleComment = ({ text, by, time, id, kids }) => {
                 </AccordionSummary>
                 {subComments?.length && subComments.map((item) => (
                     <AccordionDetails style={{ padding: "15px", display: "flex", flexDirection: "column" }}>
-                        <Typography variant="subtitle2" style={{ marginLeft: "15px"}}>- by {item.by}</Typography>
-                        <Typography variant="body2" style={{ marginLeft: "20px"}}>{item.text}</Typography>
+                        <Typography variant="subtitle2" style={{ marginLeft: "15px" }}>- by {item.by}</Typography>
+                        <Typography variant="body2" style={{ marginLeft: "20px" }}>{item.text}</Typography>
                     </AccordionDetails>
                 ))}
             </Accordion>
